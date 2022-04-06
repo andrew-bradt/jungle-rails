@@ -1,1 +1,15 @@
-<p><%= product.product_id %></p>
+<tr>
+  <td><%= image_tag product.image.tiny %>
+
+  <td>
+    <h4><%= product.name %>
+    <br>
+    <p><%= product.description %></p>
+  </td>
+
+  <td><%= humanized_money_with_symbol product.price_cents / 100 %></td>
+  
+  <td><%= line_item.quantity%></td>
+  
+  <td><%= humanized_money_with_symbol product.price_cents * line_item.quantity / 100 %></td>
+</tr>

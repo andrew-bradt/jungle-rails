@@ -18,17 +18,7 @@
       </thead>
       <tbody>
         <% @products.each_with_index do |product, i| %>
-          <tr>
-            <td><%= image_tag product.image.tiny %>
-            <td>
-              <h4><%= product.name %>
-              <br>
-              <p><%= product.description %></p>
-            </td>
-            <td><%= humanized_money_with_symbol product.price_cents / 100 %></td>
-            <td><%= @order.line_items[i].quantity%></td>
-            <td><%= humanized_money_with_symbol product.price_cents * @order.line_items[i].quantity / 100 %></td>
-          </tr>
+          <%= render 'line_item', product: product, line_item: @order.line_items[i]%>
         <% end %>
       </tbody>
       <tfoot>
