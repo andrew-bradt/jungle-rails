@@ -7,6 +7,9 @@
     <table class="table table-bordered">
       <thead>
         <tr>
+          <th>Email:</th><td colspan="4"><%= @order.email %></td>
+        </tr>
+        <tr>
           <th colspan="2">Product</th>
           <th>Unit Price</th>
           <th>Quantity</th>
@@ -22,12 +25,22 @@
               <br>
               <p><%= product.description %></p>
             </td>
-            <td><%= product.price_cents %></td>
+            <td><%= humanized_money_with_symbol product.price_cents / 100 %></td>
             <td><%= @order.line_items[i].quantity%></td>
-            <td><%= product.price_cents * @order.line_items[i].quantity%></td>
+            <td><%= humanized_money_with_symbol product.price_cents * @order.line_items[i].quantity / 100 %></td>
           </tr>
         <% end %>
       </tbody>
+      <tfoot>
+          <tr>
+            <th colspan="4">
+              TOTAL:
+            </th>
+            <th>
+              <%= humanized_money_with_symbol @order.total_cents / 100 %>
+            </th>
+          </tr>
+        </tfoot>
     </table>
   </div>
 
