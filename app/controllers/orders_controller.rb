@@ -2,12 +2,15 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    
+    product_ids = @order.line_items.map {|item| item.product_id}
+    @products = Product.where(id: product_ids)
   end
 
   def create
     charge = perform_stripe_charge
     order  = create_order(charge)
-
+    
     if order.valid?
       empty_cart!
       redirect_to order, notice: 'Your Order has been placed.'
@@ -23,7 +26,7 @@ class OrdersController < ApplicationController
 
   def empty_cart!
     # empty hash means no products in cart :)
-    update_cart({})
+    update_cart({})       
   end
 
   def perform_stripe_charge
@@ -55,5 +58,4 @@ class OrdersController < ApplicationController
     order.save!
     order
   end
-
 end
