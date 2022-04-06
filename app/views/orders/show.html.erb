@@ -4,19 +4,32 @@
   </header>
 
   <div class="order-summary jumbotron">
-    <ul>
-      <li>Email: <%= @order.email %></li>
-      <li>
-        <ul>
-        <% @order.line_items.each do |item| %>
-          <li><%= item.inspect %></li>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th colspan="2">Product</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @products.each_with_index do |product, i| %>
+          <tr>
+            <td><%= image_tag product.image.tiny %>
+            <td>
+              <h4><%= product.name %>
+              <br>
+              <p><%= product.description %></p>
+            </td>
+            <td><%= product.price_cents %></td>
+            <td><%= @order.line_items[i].quantity%></td>
+            <td><%= product.price_cents * @order.line_items[i].quantity%></td>
+          </tr>
         <% end %>
-        </ul>
-      </li>
-      <li>Total: <%= @order.total_cents %></li>
-    </ul>
+      </tbody>
+    </table>
   </div>
 
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
-
 </section>
