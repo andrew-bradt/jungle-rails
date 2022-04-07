@@ -1,3 +1,5 @@
+<h1><%= @current_user %></h1>
+
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
@@ -49,8 +51,10 @@
             <%= fa_icon "shopping-cart" %> My Cart (<%= cart.size %>)
           <% end %>
         </li>
-        <% if @current_user %>
+        <% if current_user %>
+          <li>
             <%= link_to 'Logout', '/logout' %>
+          </li>
         <% else %>
           <li>
             <%= link_to 'Sign Up', '/signup' %>
