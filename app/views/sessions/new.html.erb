@@ -1,6 +1,6 @@
-<h1>Login<h1>
+<h1>Login</h1>
 
-<%= form_tag '/login' do |f| %>
+<%= form_for '/login' do |f| %>
   <div class='form-group'>
     <%= f.label :email%>
     <%= f.text_field :email %>
@@ -11,5 +11,5 @@
     <%= f.text_field :password %>
   </div>
 
-  <%= f.submit 'Login' class: 'btn btn-primary' %>
+  <%= f.submit 'Login', class: 'btn btn-primary' %>
 <% end %>
