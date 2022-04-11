@@ -55,3 +55,6 @@ bower.json
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# Local Directory for Notes, Code Playground
+LOCAL/
