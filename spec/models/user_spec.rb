@@ -14,6 +14,58 @@ RSpec.describe User, type: :model do
       expect(@user.id).to_not be_present
     end
 
+    it 'should require a first name' do
+      @user = User.new(
+        first_name: nil,
+        last_name: 'bradt',
+        email: 'andrewbradt@gmail.com',
+        password: 'some password',
+        password_confirmation: 'some password'
+      )
+
+      @user.save
+      expect(@user.id).to_not be_present
+    end
+
+    it 'should require a last name' do
+      @user = User.new(
+        first_name: 'andrew',
+        last_name: nil,
+        email: 'andrewbradt@gmail.com',
+        password: 'some password',
+        password_confirmation: 'some password'
+      )
+      
+      @user.save
+      expect(@user.id).to_not be_present
+    end
+
+    it 'should require a password' do
+      @user = User.new(
+        first_name: 'andrew',
+        last_name: 'bradt',
+        email: 'andrewbradt@gmail.com',
+        password: nil,
+        password_confirmation: 'some password'
+      )
+      
+      @user.save
+      expect(@user.id).to_not be_present
+    end
+
+    it 'should require a password confirmation' do
+      @user = User.new(
+        first_name: 'andrew',
+        last_name: 'bradt',
+        email: 'andrewbradt@gmail.com',
+        password: 'some password',
+        password_confirmation: nil
+      )
+      
+      @user.save
+      expect(@user.id).to_not be_present
+    end
+
     it 'should not create a new user if passwords do not match' do
       @user = User.new(
         first_name: 'andrew',
