@@ -101,9 +101,7 @@ RSpec.describe User, type: :model do
       expect(@user.id).to be_present
       expect(@user2.id).to_not be_present
     end
-  end
 
-  describe 'Password Length' do
     it 'should create a user if password is atleast 6 characters' do
       @user = User.new(
         first_name: 'Tim',
@@ -128,5 +126,6 @@ RSpec.describe User, type: :model do
       expect(@user.id).to_not be_present
     end
   end
+
 
 end
