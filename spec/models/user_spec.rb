@@ -133,7 +133,7 @@ RSpec.describe User, type: :model do
         first_name: 'Jane',
         last_name: 'Doe',
         email: 'janedoe@gmail.com',
-        password: 'janeoe',
+        password: 'janedoe',
         password_confirmation: 'janedoe'
       )
       @valid_user.save
@@ -141,7 +141,7 @@ RSpec.describe User, type: :model do
 
     it 'should return a user instance if valid credentials are provided' do
       @user = User.authenticate_with_credentials('janedoe@gmail.com', 'janedoe')
-      expect(@user).to be_a(User)
+      expect(@user).to be_a User
     end
 
     it 'should return nil if invalid credentials are provided' do
