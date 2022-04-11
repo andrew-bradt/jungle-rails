@@ -4,7 +4,8 @@ RSpec.describe User, type: :model do
   describe 'Validations' do
     it 'should not create a new user if passwords do not match' do
       @user = User.new(
-        name: 'andrew',
+        first_name: 'andrew',
+        last_name: 'bradt',
         email: 'andrewbradt@gmail.com',
         password: 'some password',
         password_confirmation: 'sum password'
