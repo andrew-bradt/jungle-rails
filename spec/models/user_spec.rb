@@ -102,4 +102,31 @@ RSpec.describe User, type: :model do
       expect(@user2.id).to_not be_present
     end
   end
+
+  describe 'Password Length' do
+    it 'should create a user if password is atleast 6 characters' do
+      @user = User.new(
+        first_name: 'Tim',
+        last_name: 'Johnny',
+        email: 'timjohnny@gmail.com',
+        password: 'timhasapassword',
+        password_confirmation: 'timhasapassword'
+      )
+      @user.save
+      expect(@user.id).to be_present
+    end
+
+    it 'should not create a user if password is under 6 characters' do
+      @user = User.new(
+        first_name: 'Mit',
+        last_name: 'Johnny',
+        email: 'mitjohnny@gmail.com',
+        password: 'bad',
+        password_confirmation: 'bad'
+      )
+      @user.save
+      expect(@user.id).to_not be_present
+    end
+  end
+
 end
