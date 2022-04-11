@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true, length: {minimum: 6}
   validates :first_name, presence:true
   validates :last_name, presence:true
+
+  def self.authenticate_with_credentials(email, password)
+    
+  end
 end
