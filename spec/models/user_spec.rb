@@ -77,5 +77,29 @@ RSpec.describe User, type: :model do
       @user.save
       expect(@user.id).to_not be_present
     end
+
+    it 'should not create a user if email has already been used' do
+      @user = User.new(
+        first_name: 'test',
+        last_name: 'test',
+        email: 'test@gmail.com',
+        password: 'some-test',
+        password_confirmation: 'some-test'
+      )
+
+      @user2 = User.new(
+        first_name: 'test',
+        last_name: 'test',
+        email: 'test@gmail.com',
+        password: 'some-test',
+        password_confirmation: 'some-test'
+      )
+
+      @user.save
+      @user2.save
+
+      expect(@user.id).to be_present
+      expect(@user2.id).to_not be_present
+    end
   end
 end
