@@ -148,5 +148,16 @@ RSpec.describe User, type: :model do
       @user = User.authenticate_with_credentials('someotheremail@gmail.com', 'hajsdf')
       expect(@user).to be_nil
     end
+
+    it 'should not have a case sensitive email address' do
+      @user = User.authenticate_with_credentials('jAnEDoE@gMaIL.cOm', 'janedoe')
+      expect(@user).to be_a User
+    end
+
+    it 'should return a user instance even if email has padded spaces' do
+      @user = User.authenticate_with_credentials('    janedoe@gmail.com    ', 'janedoe')
+      expect(@user).to be_a User
+    end
+
   end
 end
