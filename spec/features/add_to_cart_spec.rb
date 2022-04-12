@@ -19,11 +19,14 @@ RSpec.feature "Visitor adds a product to their cart", type: :feature, js: true d
     end
   end
 
-  scenario "They see all products" do
+  scenario "They can add a product to the cart" do
     # ACT
     visit root_path
-
+    find('button', text: 'Add', match: :first).click
+   
     # DEBUG / VERIFY
+    cart = find('a', text: 'My Cart (1)')
+    expect(cart).to be_present
+    save_screenshot
   end
-
 end
