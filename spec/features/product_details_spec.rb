@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Users can navigate to the product detail page by clicking on a product", type: :feature, js: true do
+RSpec.feature "Visitor navigates to a product page", type: :feature, js: true do
    
   # SETUP
    before :each do
@@ -17,11 +17,16 @@ RSpec.feature "Users can navigate to the product detail page by clicking on a pr
     end
   end
 
-  scenario "They see all products" do
+  scenario "They are redirected to a specific product page after clicking the product" do
     # ACT
-    
+    visit root_path
 
     # DEBUG / VERIFY
+    find('article.product a', match: :first).click
+    expected_path = "/products/#{@category.products.last[:id]}"
+    expect(page).to have_css 'section.products-show'
+    expect(page).to have_current_path(expected_path)
+    save_screenshot
   end
 
 end
